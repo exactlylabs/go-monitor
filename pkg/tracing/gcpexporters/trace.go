@@ -2,7 +2,7 @@ package gcpexporters
 
 import (
 	texporter "github.com/GoogleCloudPlatform/opentelemetry-operations-go/exporter/trace"
-	"github.com/pkg/errors"
+	"github.com/exactlylabs/go-errors/pkg/errors"
 	sdktrace "go.opentelemetry.io/otel/sdk/trace"
 )
 
@@ -10,7 +10,7 @@ import (
 func NewTraceExporter() (sdktrace.SpanExporter, error) {
 	exporter, err := texporter.New()
 	if err != nil {
-		return nil, errors.Wrap(err, "googleops.NewTraceExporter New")
+		return nil, errors.Wrap(err, "New")
 	}
 	return exporter, nil
 }
