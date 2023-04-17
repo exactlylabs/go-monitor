@@ -4,7 +4,9 @@ import (
 	"log"
 	"net/http"
 	"runtime/debug"
+	"time"
 
+	"github.com/exactlylabs/go-errors/pkg/errors"
 	"github.com/exactlylabs/go-rest/pkg/restapi/apierrors"
 	"github.com/exactlylabs/go-rest/pkg/restapi/webcontext"
 	"github.com/getsentry/sentry-go"
@@ -16,7 +18,9 @@ type sentryMiddleware struct {
 
 func (sm *sentryMiddleware) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	defer func() {
-		if err := recover(); err != nil {
+		var err error
+		errors.RecoverPanic(recover(), &err)
+		if err != nil {
 			ctx := webcontext.New()
 			ctx = ctx.PrepareRequest(w, r)
 			ctx.Reject(http.StatusInternalServerError, &apierrors.InternalAPIError)
@@ -27,7 +31,8 @@ func (sm *sentryMiddleware) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			hub.ConfigureScope(func(scope *sentry.Scope) {
 				scope.SetRequest(ctx.Request)
 			})
-			hub.Recover(err)
+			CaptureException(hub, err)
+			hub.Flush(2 * time.Second)
 		}
 	}()
 	sm.handler.ServeHTTP(w, r)
