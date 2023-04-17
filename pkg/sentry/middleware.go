@@ -33,6 +33,7 @@ func (sm *sentryMiddleware) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			})
 			CaptureException(hub, err)
 			hub.Flush(2 * time.Second)
+			ctx.Commit()
 		}
 	}()
 	sm.handler.ServeHTTP(w, r)
