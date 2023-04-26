@@ -14,6 +14,8 @@ func init() {
 	notifiedErrors = make(map[error]struct{})
 }
 
+type Context = sentry.Context
+
 // Typeable interface is used to define a type for the error, to show in Sentry instead of the usual fmt.Wrap or errors.withStack
 type Typeable interface {
 	Type() string
