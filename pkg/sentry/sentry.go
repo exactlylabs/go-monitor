@@ -8,6 +8,12 @@ import (
 	"github.com/getsentry/sentry-go"
 )
 
+var notifiedErrors map[error]struct{}
+
+func init() {
+	notifiedErrors = make(map[error]struct{})
+}
+
 // Typeable interface is used to define a type for the error, to show in Sentry instead of the usual fmt.Wrap or errors.withStack
 type Typeable interface {
 	Type() string
@@ -27,6 +33,23 @@ func NotifyIfPanic() {
 
 		// Raise the panic back again
 		panic(err)
+	}
+}
+
+// NotifyError to sentry
+func NotifyError(err error, contexts map[string]sentry.Context) {
+	hub := sentry.CurrentHub().Clone()
+	hub.ConfigureScope(func(scope *sentry.Scope) {
+		scope.SetContexts(contexts)
+	})
+	hub.CaptureException(err)
+}
+
+// NotifyErrorOnce will send an error if it has never occurred in this current process
+func NotifyErrorOnce(err error, contexts map[string]sentry.Context) {
+	if _, exists := notifiedErrors[err]; !exists {
+		NotifyError(err, contexts)
+		notifiedErrors[err] = struct{}{}
 	}
 }
 
