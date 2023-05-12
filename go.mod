@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/GoogleCloudPlatform/opentelemetry-operations-go/exporter/trace v1.12.0
-	github.com/exactlylabs/go-errors v0.0.1
+	github.com/exactlylabs/go-errors v0.0.2
 	github.com/exactlylabs/go-rest v0.0.3
 	github.com/getsentry/sentry-go v0.20.0
 	github.com/gofrs/uuid v4.4.0+incompatible
@@ -29,7 +29,6 @@ require (
 	github.com/google/go-cmp v0.5.9 // indirect
 	github.com/googleapis/enterprise-certificate-proxy v0.2.1 // indirect
 	github.com/googleapis/gax-go/v2 v2.7.0 // indirect
-	github.com/pkg/errors v0.9.1 // indirect
 	go.opencensus.io v0.24.0 // indirect
 	go.opentelemetry.io/otel/metric v0.37.0 // indirect
 	go.uber.org/atomic v1.10.0 // indirect
