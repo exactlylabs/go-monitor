@@ -41,6 +41,10 @@ func NotifyIfPanic() {
 // NotifyError to sentry
 func NotifyError(err error, contexts map[string]sentry.Context) {
 	hub := sentry.CurrentHub().Clone()
+	metadata := errors.GetMetadata(err)
+	if metadata != nil {
+		contexts["Error Metadata"] = *metadata
+	}
 	hub.ConfigureScope(func(scope *sentry.Scope) {
 		scope.SetContexts(contexts)
 	})
@@ -59,7 +63,7 @@ func createEventFromError(hub *sentry.Hub, err error) *sentry.Event {
 	// create a custom event
 	// Based on https://github.com/getsentry/sentry-go/blob/85b380d192353dc9ca3df14fc4f8fa727a33cb2c/client.go
 	// Additions: TypeableError interface
-
+	topLevelErr := err
 	event := sentry.NewEvent()
 	event.Level = sentry.LevelFatal
 	for i := 0; i < hub.Client().Options().MaxErrorDepth && err != nil; i++ {
@@ -87,6 +91,14 @@ func createEventFromError(hub *sentry.Hub, err error) *sentry.Event {
 	// current stack is most likely unrelated to errors deeper in the chain.
 	if event.Exception[0].Stacktrace == nil {
 		event.Exception[0].Stacktrace = sentry.NewStacktrace()
+	}
+
+	meta := errors.GetMetadata(topLevelErr)
+	if meta != nil {
+		if event.Contexts == nil {
+			event.Contexts = make(map[string]sentry.Context)
+		}
+		event.Contexts["Error Metadata"] = *meta
 	}
 
 	// event.Exception should be sorted such that the most recent error is last.
