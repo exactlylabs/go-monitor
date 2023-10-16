@@ -27,6 +27,8 @@ github.com/envoyproxy/go-control-plane v0.9.4/go.mod h1:6rpuAdCZL397s3pYoYcLgu1m
 github.com/envoyproxy/protoc-gen-validate v0.1.0/go.mod h1:iSmxcyjqTsJpI2R4NaDN7+kN2VEUnK/pcBlmesArF7c=
 github.com/exactlylabs/go-errors v0.0.2 h1:1027rcDf8/0nRdooF5yllNV+BtAg6Lr9qS3NH87WpPA=
 github.com/exactlylabs/go-errors v0.0.2/go.mod h1:T1BpfYWTYfnolGrSw/nT4S6PZ+TC4uXCKqvjfCj/OTc=
+github.com/exactlylabs/go-errors v0.1.1 h1:nxS12nvpdBvUY/nkv8SnuYj1yXqt4bUxRu+nYN+WZAM=
+github.com/exactlylabs/go-errors v0.1.1/go.mod h1:aMOjuI37HbRcSGiNmSgs/h/3H8WmdQqC+1SMfwn/7rA=
 github.com/exactlylabs/go-rest v0.0.3 h1:IZY45+EQI6B2sbc0n/x6e5wJud5CawqNrAxVVuKS6oU=
 github.com/exactlylabs/go-rest v0.0.3/go.mod h1:dWYi/DOYV+WTI2goWNpQXZ7rAr4q2I5lwyoCnE/3jxI=
 github.com/felixge/httpsnoop v1.0.3 h1:s/nj+GCswXYzN5v2DpNMuMQYe+0DDwt5WVCU6CWBdXk=

@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/GoogleCloudPlatform/opentelemetry-operations-go/exporter/trace v1.12.0
-	github.com/exactlylabs/go-errors v0.0.2
+	github.com/exactlylabs/go-errors v0.1.1
 	github.com/exactlylabs/go-rest v0.0.3
 	github.com/getsentry/sentry-go v0.20.0
 	github.com/gofrs/uuid v4.4.0+incompatible
