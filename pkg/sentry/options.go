@@ -21,3 +21,26 @@ func WithTag(key, value string) Option {
 		})
 	}
 }
+
+func WithTransport(transport sentry.Transport) Option {
+	return func(hub *sentry.Hub) {
+		opts := hub.Client().Options()
+		opts.Transport = transport
+		c, err := sentry.NewClient(opts)
+		if err != nil {
+			panic(err)
+		}
+		hub.BindClient(c)
+	}
+}
+
+func WithClientOptions(opts ClientOptions) Option {
+	return func(hub *sentry.Hub) {
+		opts.AttachStacktrace = true
+		c, err := sentry.NewClient(opts)
+		if err != nil {
+			panic(err)
+		}
+		hub.BindClient(c)
+	}
+}

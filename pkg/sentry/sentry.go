@@ -15,6 +15,15 @@ func init() {
 }
 
 type Context = sentry.Context
+type ClientOptions = sentry.ClientOptions
+type User = sentry.User
+type Scope = sentry.Scope
+
+// Exported functions from sentry's original package to avoid importing it
+var (
+	CurrentHub     = sentry.CurrentHub
+	ConfigureScope = sentry.ConfigureScope
+)
 
 // Typeable interface is used to define a type for the error, to show in Sentry instead of the usual fmt.Wrap or errors.withStack
 type Typeable interface {
