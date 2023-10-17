@@ -8,10 +8,10 @@ import (
 	"github.com/getsentry/sentry-go"
 )
 
-var notifiedErrors map[error]struct{}
+var notifiedErrors map[string]struct{}
 
 func init() {
-	notifiedErrors = make(map[error]struct{})
+	notifiedErrors = make(map[string]struct{})
 }
 
 type Context = sentry.Context
@@ -28,6 +28,11 @@ var (
 // Typeable interface is used to define a type for the error, to show in Sentry instead of the usual fmt.Wrap or errors.withStack
 type Typeable interface {
 	Type() string
+}
+
+// Hasher transforms the object into an unique hash string
+type Hasher interface {
+	Hash() string
 }
 
 // NotifyIfPanic recovers from the panic and sends the error to Sentry, panicking shortly thereafter
@@ -62,9 +67,16 @@ func NotifyError(err error, contexts map[string]sentry.Context) {
 
 // NotifyErrorOnce will send an error if it has never occurred in this current process
 func NotifyErrorOnce(err error, contexts map[string]sentry.Context) {
-	if _, exists := notifiedErrors[err]; !exists {
+	hash := ""
+	switch err := err.(type) {
+	case Hasher:
+		hash = err.Hash()
+	default:
+		hash = err.Error()
+	}
+	if _, exists := notifiedErrors[hash]; !exists {
 		NotifyError(err, contexts)
-		notifiedErrors[err] = struct{}{}
+		notifiedErrors[hash] = struct{}{}
 	}
 }
 
