@@ -1,6 +1,8 @@
 module github.com/exactlylabs/go-monitor
 
-go 1.20
+go 1.22
+
+toolchain go1.23.3
 
 require (
 	github.com/GoogleCloudPlatform/opentelemetry-operations-go/exporter/trace v1.12.0
@@ -9,11 +11,11 @@ require (
 	github.com/getsentry/sentry-go v0.20.0
 	github.com/gofrs/uuid v4.4.0+incompatible
 	github.com/gorilla/mux v1.8.0
-	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.40.0
-	go.opentelemetry.io/otel v1.14.0
+	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.57.0
+	go.opentelemetry.io/otel v1.32.0
 	go.opentelemetry.io/otel/exporters/stdout/stdouttrace v1.14.0
 	go.opentelemetry.io/otel/sdk v1.14.0
-	go.opentelemetry.io/otel/trace v1.14.0
+	go.opentelemetry.io/otel/trace v1.32.0
 )
 
 require (
@@ -21,16 +23,16 @@ require (
 	cloud.google.com/go/compute/metadata v0.2.3 // indirect
 	cloud.google.com/go/trace v1.8.0 // indirect
 	github.com/GoogleCloudPlatform/opentelemetry-operations-go/internal/resourcemapping v0.36.0 // indirect
-	github.com/felixge/httpsnoop v1.0.3 // indirect
-	github.com/go-logr/logr v1.2.3 // indirect
+	github.com/felixge/httpsnoop v1.0.4 // indirect
+	github.com/go-logr/logr v1.4.2 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
-	github.com/google/go-cmp v0.5.9 // indirect
+	github.com/google/go-cmp v0.6.0 // indirect
 	github.com/googleapis/enterprise-certificate-proxy v0.2.1 // indirect
 	github.com/googleapis/gax-go/v2 v2.7.0 // indirect
 	go.opencensus.io v0.24.0 // indirect
-	go.opentelemetry.io/otel/metric v0.37.0 // indirect
+	go.opentelemetry.io/otel/metric v1.32.0 // indirect
 	go.uber.org/atomic v1.10.0 // indirect
 	go.uber.org/multierr v1.8.0 // indirect
 	golang.org/x/net v0.8.0 // indirect
